@@ -10,6 +10,13 @@
 ## We use the solve function to compute the inverse of a square matrix. 
 ## NOTE => We assume that the input matrix is always invertible.
 
+## Example Usage =>
+# cacheableMatrix <- makeCacheMatrix(matrix(rnorm(16), 4, 4)) 
+# cacheSolve(cacheableMatrix)
+# cacheSolve(cacheableMatrix) # Second time value returned from cahce
+# Once cacheSolve is called, we can also get the value of metrix inverse using 
+# cacheableMatrix$getInverse()
+
 ## makeCacheMatrix: This function creates a special "matrix" object that 
 ##                  can cache its inverse. 
 ## Returns a list containing functions to:
@@ -17,7 +24,8 @@
 ##      get the value of the matrix
 ##      set the value of the inverse of the given matrix
 ##      get the value of the inverse of the given matrix
-## Example Usage => makeCacheMatrix(matrix(1:4, 2, 2))
+## Example Usage:
+## cacheableMatrix <- makeCacheMatrix(matrix(1:4, 2, 2))
 makeCacheMatrix <- function(x = matrix()) {
     matrixInverse <- NULL
     set <- function(matrix) {
@@ -32,7 +40,10 @@ makeCacheMatrix <- function(x = matrix()) {
         getInverse = getInverse)
 }
 
-## Returns a matrix that is the inverse of 'x'
+## Returns a matrix that is the inverse of 'x' and caches the value
+## Example Usage:
+## cm <- makeCacheMatrix(matrix(1:4, 2, 2))
+## cacheSolve(cm)
 cacheSolve <- function(x, ...) {
     matrixInverse <- x$getInverse()
     if(!is.null(matrixInverse)) {
