@@ -33,7 +33,7 @@ makeCacheMatrix <- function(x = matrix()) {
         matrixInverse <<- NULL
     }
     get <- function() x
-    setInverse <- function(matrixInverse) matrixInverse <<- matrixInverse
+    setInverse <- function(solve) matrixInverse <<- solve
     getInverse <- function() matrixInverse
     list(set = set, get = get,
         setInverse = setInverse,
@@ -52,6 +52,7 @@ cacheSolve <- function(x, ...) {
     }
     data <- x$get()
     matrixInverse <- solve(data, ...)
+    # set the calculated inverse in the cacheable matrix object
     x$setInverse(matrixInverse)
     matrixInverse
 }
